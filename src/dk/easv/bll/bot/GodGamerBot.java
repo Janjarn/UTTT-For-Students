@@ -5,6 +5,8 @@ import dk.easv.bll.game.IGameState;
 import dk.easv.bll.move.IMove;
 import dk.easv.bll.move.Move;
 
+import java.util.Random;
+
 public class GodGamerBot implements IBot{
     private static final String BOTNAME = "GodGamerBot";
 
@@ -13,14 +15,12 @@ public class GodGamerBot implements IBot{
             {0, 0}, {2, 2}, {0, 2}, {2, 0},  //Corners ordered across
             {1, 1}}; //Center
 
-
     @Override
     public IMove doMove(IGameState state) {
         for (int[] move : preferredMoves)
         {
             if(state.getField().getMacroboard()[move[0]][move[1]].equals(IField.AVAILABLE_FIELD))
             {
-                //find move to play
                 for (int[] selectedMove : preferredMoves)
                 {
                     int x = move[0]*3 + selectedMove[0];
@@ -36,9 +36,9 @@ public class GodGamerBot implements IBot{
         return state.getField().getAvailableMoves().get(0);
     }
 
-    public boolean playedMoveTwice(){
+    /*public boolean playedMoveTwice(){
 
-    }
+    }*/
 
     @Override
     public String getBotName() {
