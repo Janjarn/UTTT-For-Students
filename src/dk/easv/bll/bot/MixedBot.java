@@ -35,6 +35,7 @@ public class MixedBot implements IBot {
         return mixedMoves(state);
     }
 
+    // Plays random at odd rounds (1st, 3rd round etc.) and plays preferred moves at even rounds (2nd, 4th...)
     public IMove mixedMoves(IGameState state) {
         List<IMove> moves = state.getField().getAvailableMoves();
         for (int[] move : preferredMoves)
@@ -57,6 +58,53 @@ public class MixedBot implements IBot {
     }
 
     private boolean isWinningMove(IGameState state, IMove move, String player){
+        /*String[][] board = state.getField().getBoard();
+        boolean isRowWin = true;
+        // Row checking
+        int startX = move.getX()-(move.getX()%3);
+        int endX = startX + 2;
+        for (int x = 0; x < startX; x++) {
+            if (x!=move.getX())
+                if (!board[x][move.getY()].equals(player))
+                    isRowWin = false;
+        }
+
+        boolean isColumnWin = true;
+        // Column chcking
+        int startY = move.getY()-(move.getY()%3);
+        int endY = startY + 2;
+        for (int y = 0; y < startX; y++) {
+            if (y != move.getY())
+                if (!board[move.getX()][y].equals(player))
+                    isColumnWin = false;
+        }
+
+        boolean isDiagWin = true;
+        // Diagonal checking left-top to right-bottom
+        if (!(move.getX()==startX && move.getY()==startY))
+            if (!board[startX][startY].equals(player))
+                isDiagWin = false;
+        if (!(move.getX()==startX+1 && move.getY()==startY+1))
+            if (!board[startX+1][startY+2].equals(player))
+                isDiagWin = false;
+        if (!(move.getX()==startX+2 && move.getY()==startY+2))
+            if (!board[startX+2][startY+2].equals(player))
+                isDiagWin = false;
+
+        boolean isOppositeDiagWin = true;
+        // Diagonal checking left-top to right-bottom
+        if (!(move.getX()==startX && move.getY()==startY+2))
+            if (!board[startX][startY+2].equals(player))
+                isOppositeDiagWin = false;
+        if (!(move.getX()==startX+1 && move.getY()==startY+1))
+            if (!board[startX+1][startY+1].equals(player))
+                isOppositeDiagWin = false;
+        if (!(move.getX()==startX+2 && move.getY()==startY))
+            if (!board[startX+2][startY].equals(player))
+                isOppositeDiagWin = false;
+
+        return isColumnWin || isDiagWin || isOppositeDiagWin || isRowWin;*/
+
         // Clones the array and all values to a new array, so we don't mess with the game
         String[][] board = Arrays.stream(state.getField().getBoard()).map(String[]::clone).toArray(String[][]::new);
 
